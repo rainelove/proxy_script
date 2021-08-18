@@ -14,7 +14,7 @@
 
 
 # read configuration file
-proxy_dir="."
+proxy_dir="/usrdsk/CSU8000/update"
 
 if test -f ${proxy_dir}/proxy.conf; then
 
@@ -46,8 +46,8 @@ if test -f ${proxy_dir}/proxy.conf; then
         if
 
         # add iptables regular line by line
-        iptables -t nat -A PREROUTING -d ${outter_ip} -p tcp --dport ${outter_port} -j DNAT --to ${inner_socket}
-        iptables -t nat -A POSTROUTING -s ${inner_ip} -p tcp --sport ${inner_port} -j SNAT --to ${outter_ip}
+        iptables -t nat -A PREROUTING -d ${outter_ip} -p ${protocol} --dport ${outter_port} -j DNAT --to ${inner_socket}
+        iptables -t nat -A POSTROUTING -s ${inner_ip} -p ${protocol} --sport ${inner_port} -j SNAT --to ${outter_ip}
 
     done
 else
